@@ -1,0 +1,7 @@
+{
+  "name": "taskList_Ionic",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
