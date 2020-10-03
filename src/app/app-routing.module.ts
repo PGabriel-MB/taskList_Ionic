@@ -11,6 +11,10 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'visualizar-tarefa',
+    loadChildren: () => import('./visualizar-tarefa/visualizar-tarefa.module').then( m => m.VisualizarTarefaPageModule)
+  },
 ];
 
 @NgModule({
