@@ -9,8 +9,23 @@ export class StorageService {
 
   constructor(private strg: Storage) { }
 
-  salvarTarefa(tarefa: any){
-    //tarefa.id = tarefa.id ? tarefa.id : Math.floor(1000 * Math.random())
-    this.strg.set(tarefa.id, tarefa);
+  salvarTarefa(tarefa: any) {
+    tarefa.id = tarefa.id ? tarefa.id : Math.floor(1000 * Math.random())
+    this.strg.set(String(tarefa.id), tarefa);
   }
+
+  excluirTarefa(idTarefa: string) {
+    this.strg.remove(idTarefa);
+  }
+
+  pegarTarefas() {
+    let tarefas: Tarefa[] = [];
+
+    this.strg.forEach((value: Tarefa, key: string, iterationNumber: Number) => {
+      tarefas.push(value)
+    });
+
+    return tarefas || [];
+  }
+
 }

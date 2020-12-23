@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Tarefa } from "../api/models/Tarefa";
+import { StorageService } from "../api/storage/storage.service";
 
 @Component({
   selector: 'app-home',
@@ -13,6 +14,7 @@ export class HomePage {
   constructor(
     public router: Router,
     public actvdRoute: ActivatedRoute,
+    public strgSvc: StorageService
   ) {
   }
 
@@ -39,40 +41,42 @@ export class HomePage {
   }
 
   getTarefas() {
-    this.listaTarefas.push(new Tarefa({
-      id: 1,
-      nomeTarefa: 'Escovar o Dente',
-      dataHoraEntrega: new Date(),
-      detalhes: 'trenzinho, circulozinho, vassourinha'
-    }));
+    this.listaTarefas = this.strgSvc.pegarTarefas();
 
-    this.listaTarefas.push(new Tarefa({
-      id: 2,
-      nomeTarefa: 'Escovar o Dente',
-      dataHoraEntrega: new Date(),
-      detalhes: 'trenzinho, circulozinho, vassourinha'
-    }));
+    // this.listaTarefas.push(new Tarefa({
+    //   id: 1,
+    //   nomeTarefa: 'Escovar o Dente',
+    //   dataHoraEntrega: new Date(),
+    //   detalhes: 'trenzinho, circulozinho, vassourinha'
+    // }));
 
-    this.listaTarefas.push(new Tarefa({
-      id: 3,
-      nomeTarefa: 'Escovar o Dente',
-      dataHoraEntrega: new Date(),
-      detalhes: 'trenzinho, circulozinho, vassourinha'
-    }));
+    // this.listaTarefas.push(new Tarefa({
+    //   id: 2,
+    //   nomeTarefa: 'Escovar o Dente',
+    //   dataHoraEntrega: new Date(),
+    //   detalhes: 'trenzinho, circulozinho, vassourinha'
+    // }));
 
-    this.listaTarefas.push(new Tarefa({
-      id: 4,
-      nomeTarefa: 'Escovar o Dente',
-      dataHoraEntrega: new Date(),
-      detalhes: 'trenzinho, circulozinho, vassourinha'
-    }));
+    // this.listaTarefas.push(new Tarefa({
+    //   id: 3,
+    //   nomeTarefa: 'Escovar o Dente',
+    //   dataHoraEntrega: new Date(),
+    //   detalhes: 'trenzinho, circulozinho, vassourinha'
+    // }));
 
-    this.listaTarefas.push(new Tarefa({
-      id: 5,
-      nomeTarefa: 'Escovar o Dente',
-      dataHoraEntrega: new Date(),
-      detalhes: 'trenzinho, circulozinho, vassourinha'
-    }));
+    // this.listaTarefas.push(new Tarefa({
+    //   id: 4,
+    //   nomeTarefa: 'Escovar o Dente',
+    //   dataHoraEntrega: new Date(),
+    //   detalhes: 'trenzinho, circulozinho, vassourinha'
+    // }));
+
+    // this.listaTarefas.push(new Tarefa({
+    //   id: 5,
+    //   nomeTarefa: 'Escovar o Dente',
+    //   dataHoraEntrega: new Date(),
+    //   detalhes: 'trenzinho, circulozinho, vassourinha'
+    // }));
 
   }
 }
