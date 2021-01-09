@@ -13,7 +13,7 @@
 
   <div id="container">
     <ion-list *ngIf="listaTarefas else nothing">
-      <ion-item *ngFor="let tarefa of listaTarefas" >
+      <ion-item *ngFor="let tarefa of listaTarefas">
         <ion-label (click)="visualizarTarefa(tarefa)"> {{ tarefa.nomeTarefa }} </ion-label>
         <ion-button>
           <ion-icon slot="icon-only" name="checkmark-circle-outline"></ion-icon>
@@ -22,6 +22,11 @@
     </ion-list>
     <div padding #nothing>
       <h3>Você ainda não possui tarefas...</h3>
+      <ion-fab vertical="end" horizontal="end" slot="fixed">
+        <ion-fab-button>
+          <ion-icon name="add-circle-outline"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
     </div>
   </div>
 </ion-content>
