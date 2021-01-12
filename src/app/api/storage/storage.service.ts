@@ -6,7 +6,6 @@ import { Tarefa } from "../models/Tarefa";
   providedIn: 'root'
 })
 export class StorageService {
-
   constructor(private strg: Storage) { }
 
   salvarTarefa(tarefa: any) {
@@ -26,6 +25,22 @@ export class StorageService {
     });
 
     return tarefas || [];
+  }
+
+  setToken(key: string) {
+    this.strg.set('key', key);
+  }
+
+  getToken() {
+    return this.strg.get('key');
+  }
+
+  setUser(user: any)  {
+    this.strg.set('user', user);
+  }
+
+  getUser(){
+    return this.strg.get('user');
   }
 
 }
