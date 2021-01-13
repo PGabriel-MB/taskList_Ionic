@@ -8,15 +8,15 @@ import { StorageService } from '../storage/storage.service';
 })
 export class RequestApiService {
 
-  url: string = 'http://localhost:8000/';
+  url: string = 'http://127.0.0.1:8000/';
 
-  constructor( public strg: StorageService) { }
+  constructor(public strg: StorageService) { }
 
   async getRequest(route: string): Promise<any> {
     let request = await axios({
       method: 'GET',
       url: this.url + route,
-      headers: { 'Authorization': 'Token ' + this.strg.getToken() }
+      headers: { 'Authorization': 'Token ' + this.strg.getToken(), 'Content-Type': 'application/json' }
     }).then(async r => {
       return await r;
     });
@@ -24,25 +24,28 @@ export class RequestApiService {
     return request;
   }
 
-  async postRequest(route: string, data: any, toLogin: boolean = true): Promise<any>{
+  async postRequest(route: string, data: any, withoutHeader: boolean = false): Promise<any> {
     let request = null;
     
-    if (toLogin) {
+    if (withoutHeader) {
       request = await axios({
         method: 'POST',
+        url: this.url + route,
+        headers: { 'Content-Type': 'application/json' },
+        data,
+      }).then(async r => {
+        return await r;
+      });
+    } else {
+      request = await axios({
+        method: 'POST',
+        url: this.url + route,
+        headers: { 'Authorization': 'Token ' + this.strg.getToken(), 'Content-Type': 'application/json' },
         data,
       }).then(async r => {
         return await r;
       });
     }
-    
-    request = await axios({
-      method: 'POST',
-      headers: { 'Authorization': 'Token ' + this.strg.getToken() },
-      data,
-    }).then(async r => {
-      return await r;
-    });
 
     return request;
   }

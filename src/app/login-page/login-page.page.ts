@@ -27,9 +27,9 @@ export class LoginPagePage implements OnInit {
   sendLogin() {
     this.request.postRequest(
       'rest_auth/login/', 
-      { username: this.username, password: this.password }
+      { username: this.username, password: this.password },
+      true
     ).then(async r => {
-      console.log('DEU CERTO!!')
       this.strg.setToken(await r.data);
       this.strg.setUser({
         username: this.username 
@@ -45,7 +45,7 @@ export class LoginPagePage implements OnInit {
       password2: this.password2
     }
 
-    this.request.postRequest('res_auth/registration/', obj).then(async r => {
+    this.request.postRequest('res_auth/registration/', obj, true).then(async r => {
       this.strg.setToken(await r.data);
       this.strg.setUser({
         username: this.username 

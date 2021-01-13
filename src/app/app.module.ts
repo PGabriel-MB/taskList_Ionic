@@ -11,6 +11,9 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { IonicStorageModule } from "@ionic/storage";
 
+import { RequestApiService } from "./api/reques-api/request-api.service";
+import { StorageService } from "./api/storage/storage.service";
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -26,7 +29,9 @@ import { IonicStorageModule } from "@ionic/storage";
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    RequestApiService,
+    StorageService
   ],
   bootstrap: [AppComponent]
 })
