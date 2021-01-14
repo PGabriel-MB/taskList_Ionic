@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      TaskList Ionic
+      Bem Vindo, {{ username }}
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -12,7 +12,7 @@
   </div>
 
   <div id="container">
-    <ion-list *ngIf="listaTarefas else nothing">
+    <ion-list *ngIf="listaTarefas.length > 0; else nothing">
       <ion-item *ngFor="let tarefa of listaTarefas">
         <ion-label (click)="visualizarTarefa(tarefa)"> {{ tarefa.nomeTarefa }} </ion-label>
         <ion-button>
@@ -20,13 +20,15 @@
         </ion-button>
       </ion-item>
     </ion-list>
-    <div padding #nothing>
-      <h3>Você ainda não possui tarefas...</h3>
-      <ion-fab vertical="end" horizontal="end" slot="fixed">
-        <ion-fab-button>
-          <ion-icon name="add-circle-outline"></ion-icon>
-        </ion-fab-button>
-      </ion-fab>
-    </div>
+    <ng-template #nothing>
+      <div padding>
+        <h3>Você ainda não possui tarefas...</h3>
+      </div>
+    </ng-template>
   </div>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="add-circle-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

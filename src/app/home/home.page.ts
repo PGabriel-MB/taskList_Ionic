@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+
 import { Tarefa } from "../api/models/Tarefa";
+import { RequestApiService } from '../api/reques-api/request-api.service';
 import { StorageService } from "../api/storage/storage.service";
 
 @Component({
@@ -11,14 +13,21 @@ import { StorageService } from "../api/storage/storage.service";
 export class HomePage {
   listaTarefas: Tarefa[] = [];
 
+  username: string = '';
+
   constructor(
     public router: Router,
     public actvdRoute: ActivatedRoute,
-    public strgSvc: StorageService
+    public strgSvc: StorageService,
+    public request: RequestApiService
   ) {
   }
 
   ionViewWillEnter() {
+    this.strgSvc.getUser().then(r => {
+      this.username = r.username
+    })
+
     this.listaTarefas = []
     this.getTarefas();
 
@@ -41,42 +50,10 @@ export class HomePage {
   }
 
   getTarefas() {
-    this.listaTarefas = this.strgSvc.pegarTarefas();
+   this.request.getRequest('api/tasks/').then(async r => {
+     
+   });
 
-    // this.listaTarefas.push(new Tarefa({
-    //   id: 1,
-    //   nomeTarefa: 'Escovar o Dente',
-    //   dataHoraEntrega: new Date(),
-    //   detalhes: 'trenzinho, circulozinho, vassourinha'
-    // }));
-
-    // this.listaTarefas.push(new Tarefa({
-    //   id: 2,
-    //   nomeTarefa: 'Escovar o Dente',
-    //   dataHoraEntrega: new Date(),
-    //   detalhes: 'trenzinho, circulozinho, vassourinha'
-    // }));
-
-    // this.listaTarefas.push(new Tarefa({
-    //   id: 3,
-    //   nomeTarefa: 'Escovar o Dente',
-    //   dataHoraEntrega: new Date(),
-    //   detalhes: 'trenzinho, circulozinho, vassourinha'
-    // }));
-
-    // this.listaTarefas.push(new Tarefa({
-    //   id: 4,
-    //   nomeTarefa: 'Escovar o Dente',
-    //   dataHoraEntrega: new Date(),
-    //   detalhes: 'trenzinho, circulozinho, vassourinha'
-    // }));
-
-    // this.listaTarefas.push(new Tarefa({
-    //   id: 5,
-    //   nomeTarefa: 'Escovar o Dente',
-    //   dataHoraEntrega: new Date(),
-    //   detalhes: 'trenzinho, circulozinho, vassourinha'
-    // }));
-
+    console.log('Pegando tarefas...')
   }
 }

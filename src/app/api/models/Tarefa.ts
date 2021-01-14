@@ -1,14 +1,17 @@
 export class Tarefa {
-    id: number
-    nomeTarefa: string;
-    dataHoraEntrega: Date;
-    detalhes: string;
-    concluida: boolean = false;
+    id: string
+    taskName: string;
+    created: Date;
+    description: string;
+    completed: boolean = false;
+    taskStatus: string = 'todo'
 
-    constructor(tarefa) {
-        this.id = tarefa.id
-        this.nomeTarefa = tarefa.nomeTarefa;
-        this.dataHoraEntrega = tarefa.dataHoraEntrega;
-        this.detalhes = tarefa.detalhes;
+    constructor(task) {
+        this.id = task.id
+        this.taskName = task.t;
+        this.created = task.created;
+        this.description = task.description;
+        this.completed = task.completed;
+        this.taskStatus = task.taskStatus;
     }
 }

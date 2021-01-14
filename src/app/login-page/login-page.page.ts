@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastController } from "@ionic/angular";
+
 import { RequestApiService } from '../api/reques-api/request-api.service';
 import { StorageService } from '../api/storage/storage.service';
+
 
 @Component({
   selector: 'app-login-page',
@@ -19,9 +23,34 @@ export class LoginPagePage implements OnInit {
 
   tokenKey: string = '';
 
-  constructor(public strg: StorageService, public request: RequestApiService) { }
+  constructor(
+    public strg: StorageService,
+    public request: RequestApiService,
+    public toastCtrlr: ToastController,
+    public router: Router
+  ) { }
 
   ngOnInit() {
+    this.strg.getUser().then(async r => {
+      if (await r) {
+        this.username = r.username;
+        this.password = r.password;
+
+        this.sendLogin();
+      }
+    });
+  }
+
+  async presentToast() {
+    const toast = await this.toastCtrlr.create({
+      message: 'Cadastro criado realizado com Sucesso! Retorne a tela de Login para realizar o acesso.',
+      duration: 5000
+    });
+    toast.present();
+  }
+
+  enterHomePage(){
+    this.router.navigate(['/home']);
   }
 
   sendLogin() {
@@ -32,8 +61,11 @@ export class LoginPagePage implements OnInit {
     ).then(async r => {
       this.strg.setToken(await r.data);
       this.strg.setUser({
-        username: this.username 
+        username: this.username,
+        password: this.password
       });
+
+      this.enterHomePage();
     });
   }
 
@@ -50,6 +82,7 @@ export class LoginPagePage implements OnInit {
       this.strg.setUser({
         username: this.username 
       });
+      this.presentToast();
     });
   }
 
