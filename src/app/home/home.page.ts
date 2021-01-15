@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 
 import { Tarefa } from "../api/models/Tarefa";
 import { RequestApiService } from '../api/reques-api/request-api.service';
 import { StorageService } from "../api/storage/storage.service";
+import { AddTaskPage } from "../add-task/add-task.page";
 
 @Component({
   selector: 'app-home',
@@ -11,7 +13,7 @@ import { StorageService } from "../api/storage/storage.service";
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  listaTarefas: Tarefa[] = [];
+  taskList: Tarefa[] = [];
 
   username: string = '';
 
@@ -19,7 +21,8 @@ export class HomePage {
     public router: Router,
     public actvdRoute: ActivatedRoute,
     public strgSvc: StorageService,
-    public request: RequestApiService
+    public request: RequestApiService,
+    public mdlCtrlr: ModalController
   ) {
   }
 
@@ -28,32 +31,46 @@ export class HomePage {
       this.username = r.username
     })
 
-    this.listaTarefas = []
-    this.getTarefas();
+    this.taskList = []
+    this.getTasks();
 
     this.actvdRoute.queryParams.subscribe(res => {
       let tarefa = res.concluida ? JSON.parse(res.concluida) : false;
 
       if (tarefa) {
-        this.listaTarefas.map((item, index) => {
-          console.log('ITEM', item, tarefa)
+        this.taskList.map((item, index) => {
           if (item.id === tarefa) {
-            this.listaTarefas.splice(index, 1);
+            this.taskList.splice(index, 1);
           }
         });
       }
     });
   }
 
-  visualizarTarefa(tarefa: Tarefa) {
-    this.router.navigate(['/visualizar-tarefa'], { queryParams: { value: JSON.stringify(tarefa) } })
+  viewTask(task: Tarefa) {
+    this.router.navigate(['/visualizar-tarefa'], { queryParams: { value: JSON.stringify(task) } })
   }
 
-  getTarefas() {
+  getTasks() {
    this.request.getRequest('api/tasks/').then(async r => {
-     
+     let tasks = await r;
+     tasks.forEach(task => {
+       this.taskList.push({
+         id: task.id,
+         taskName: task.task_name,
+         created: task.created,
+         description: task.description,
+         completed: task.completed,
+         taskStatus: task.task_status
+       })
+     });
    });
+  }
 
-    console.log('Pegando tarefas...')
+  async addTask() {
+    const modal = await this.mdlCtrlr.create({
+      component: AddTaskPage
+    });
+    return await modal.present();
   }
 }

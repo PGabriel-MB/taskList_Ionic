@@ -4,7 +4,7 @@
       <ion-button [routerLink]="['/home']" >
         <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
       </ion-button>
-      <ion-title *ngIf="tarefa"> {{ tarefa.nomeTarefa }} </ion-title>
+      <ion-title *ngIf="tarefa"> {{ tarefa.taskName }} </ion-title>
     </ion-row>
   </ion-toolbar>
 </ion-header>
@@ -14,9 +14,9 @@
     <ion-row>
       <ion-col class="ion-padding">
         <ion-text color="primary">
-          <h2>Entrega</h2>
+          <h2>Criação</h2>
         </ion-text>
-        <strong>{{ tarefa.dataHoraEntrega|date:"dd/MM HH:mm" }}</strong>
+        <strong>{{ tarefa.created|date:"dd/MM HH:mm" }}</strong>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -24,7 +24,7 @@
         <ion-text color="primary">
           <h2>Detalhes</h2>
         </ion-text>
-        <strong>{{ tarefa.detalhes }}</strong>
+        <strong>{{ tarefa.description }}</strong>
       </ion-col>
     </ion-row>
     <ion-row class="ion-justify-content-center">
