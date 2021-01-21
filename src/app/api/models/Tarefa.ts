@@ -4,7 +4,7 @@ export class Tarefa {
     created: Date;
     description: string;
     completed: boolean = false;
-    taskStatus: string = 'todo'
+    taskStatus: string = 'todo';
 
     constructor(task) {
         this.id = task.id
