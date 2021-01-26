@@ -14,7 +14,6 @@ import { AddTaskPage } from "../add-task/add-task.page";
 })
 export class HomePage {
   taskList: Tarefa[] = [];
-
   username: string = '';
 
   constructor(
@@ -52,25 +51,31 @@ export class HomePage {
   }
 
   getTasks() {
-   this.request.getRequest('api/tasks/').then(async r => {
-     let tasks = await r;
-     tasks.forEach(task => {
-       this.taskList.push({
-         id: task.id,
-         taskName: task.task_name,
-         created: task.created,
-         description: task.description,
-         completed: task.completed,
-         taskStatus: task.task_status
-       })
-     });
-   });
+    this.taskList = [];
+    this.request.getRequest('api/tasks/').then(async r => {
+      let tasks = await r;
+      tasks.forEach(task => {
+        this.taskList.push({
+          id: task.id,
+          taskName: task.task_name,
+          created: task.created,
+          description: task.description,
+          completed: task.completed,
+          taskStatus: task.task_status
+        })
+      });
+    });
   }
 
   async addTask() {
     const modal = await this.mdlCtrlr.create({
       component: AddTaskPage
     });
-    return await modal.present();
+    await modal.present();
+    const { data } = await modal.onDidDismiss();
+
+    if (data.hasOwnProperty('reload')) {
+      this.getTasks();
+    }
   }
 }

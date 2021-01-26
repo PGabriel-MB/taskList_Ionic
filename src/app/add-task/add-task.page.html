@@ -1,6 +1,11 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Adicionar Tarefa</ion-title>
+    <ion-title>
+      <ion-button (click)="dismiss()">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+      Adicionar Tarefa
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -13,5 +18,5 @@
     <ion-label position="stacked">Descrição: </ion-label>
     <ion-textarea type="text"></ion-textarea>
   </ion-item>
-  <ion-button color="primary" expand="block">Salvar Tarefa</ion-button>
+  <ion-button color="primary" (click)="saveTask()" expand="block">Salvar Tarefa</ion-button>
 </ion-content>

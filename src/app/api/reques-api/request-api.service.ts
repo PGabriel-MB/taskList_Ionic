@@ -41,13 +41,17 @@ export class RequestApiService {
         return await r;
       });
     } else {
-      request = await axios({
-        method: 'POST',
-        url: this.url + route,
-        headers: { 'Authorization': 'Token ' + this.strg.getToken(), 'Content-Type': 'application/json' },
-        data,
-      }).then(async r => {
-        return await r;
+      this.strg.getToken().then(async r => {
+        this.token = await r.key;
+
+        return request = await axios({
+          method: 'POST',
+          url: this.url + route,
+          headers: { 'Authorization': 'Token ' + this.strg.getToken(), 'Content-Type': 'application/json' },
+          data,
+        }).then(async r => {
+          return await r;
+        }); 
       });
     }
 
