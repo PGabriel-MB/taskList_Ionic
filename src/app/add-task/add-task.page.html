@@ -12,11 +12,11 @@
 <ion-content>
   <ion-item>
     <ion-label position="stacked">Nome da Tarefa:</ion-label>
-    <ion-input type="text"></ion-input>
+    <ion-input [(ngModel)]="taskName" type="text"></ion-input>
   </ion-item>
   <ion-item>
     <ion-label position="stacked">Descrição: </ion-label>
-    <ion-textarea type="text"></ion-textarea>
+    <ion-textarea [(ngModel)]="description" type="text"></ion-textarea>
   </ion-item>
   <ion-button color="primary" (click)="saveTask()" expand="block">Salvar Tarefa</ion-button>
 </ion-content>

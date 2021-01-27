@@ -1,5 +1,10 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons slot="primary">
+      <ion-button>
+        <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-title>
       Bem Vindo, {{ username }}
     </ion-title>
@@ -15,7 +20,7 @@
     <ion-list *ngIf="taskList.length > 0; else nothing">
       <ion-item *ngFor="let task of taskList">
         <ion-label (click)="viewTask(task)"> {{ task.taskName }} </ion-label>
-        <ion-button>
+        <ion-button (click)="completeTask(task)">
           <ion-icon slot="icon-only" name="checkmark-circle-outline"></ion-icon>
         </ion-button>
       </ion-item>

@@ -78,4 +78,8 @@ export class HomePage {
       this.getTasks();
     }
   }
+
+  completeTask(task: any) {
+    console.log('tarefa', task)
+  }
 }

@@ -47,7 +47,7 @@ export class RequestApiService {
         return request = await axios({
           method: 'POST',
           url: this.url + route,
-          headers: { 'Authorization': 'Token ' + this.strg.getToken(), 'Content-Type': 'application/json' },
+          headers: { 'Authorization': 'Token ' + this.token, 'Content-Type': 'application/json' },
           data,
         }).then(async r => {
           return await r;
