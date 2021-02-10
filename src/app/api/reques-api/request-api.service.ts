@@ -57,4 +57,20 @@ export class RequestApiService {
 
     return request;
   }
+
+  async putRequest(route: string, data: any): Promise<any> {
+    return await this.strg.getToken().then(async r => {
+      this.token = await r.key;
+      
+      return await axios({
+        method: 'PUT',
+        url: this.url + route,
+        data,
+        headers: { 'Authorization': 'Token ' + this.token, 'Content-Type': 'application/json' }
+      }).then(async r => {
+        return await r.data;
+      });
+    });
+
+  }
 }
