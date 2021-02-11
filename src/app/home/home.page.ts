@@ -1,11 +1,16 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ModalController, ToastController } from '@ionic/angular';
+import {
+  ModalController,
+  PopoverController,
+  ToastController
+} from '@ionic/angular';
 
 import { Tarefa } from "../api/models/Tarefa";
 import { RequestApiService } from '../api/reques-api/request-api.service';
 import { StorageService } from "../api/storage/storage.service";
 import { AddTaskPage } from "../add-task/add-task.page";
+import { DropdownMenuComponent } from "../dropdown-menu/dropdown-menu.component";
 
 @Component({
   selector: 'app-home',
@@ -22,7 +27,8 @@ export class HomePage {
     public strgSvc: StorageService,
     public request: RequestApiService,
     public mdlCtrlr: ModalController,
-    public toastCtrlr: ToastController
+    public toastCtrlr: ToastController,
+    public popOverCtrlr: PopoverController
   ) {
   }
 
@@ -38,7 +44,7 @@ export class HomePage {
       let tarefa = res.concluida ? JSON.parse(res.concluida) : false;
 
       if (tarefa) {
-        this.taskList.map((item, index) => {
+        this.taskList.forEach((item, index) => {
           if (item.id === tarefa) {
             this.taskList.splice(index, 1);
           }
@@ -54,9 +60,20 @@ export class HomePage {
   async presentToast(message: string) {
     const toast = await this.toastCtrlr.create({
       message,
-      duration: 5000
+      duration: 5000,
+      mode: 'md'
     });
     toast.present();
+  }
+
+  async openMenu(event: any) {
+    const dropDownMenu = await this.popOverCtrlr.create({
+      component: DropdownMenuComponent,
+      event,
+      translucent: true,
+      cssClass: 'myCustomClass'
+    });
+    return await dropDownMenu.present();
   }
 
   getTasks() {
@@ -64,9 +81,6 @@ export class HomePage {
     this.request.getRequest('api/tasks/').then(async r => {
       let tasks = await r;
 
-      // You need to change de forEach para
-      // map to iterate the tasks that is maked with
-      // completed == false
       tasks.map(task => {
         if (!task.completed) {
           this.taskList.push({
