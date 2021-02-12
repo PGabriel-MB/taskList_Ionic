@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dropdown-menu',
@@ -7,14 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DropdownMenuComponent implements OnInit {
 
-  constructor() { }
+  constructor(public router: Router) { }
 
   ngOnInit() {}
 
-  completedTasks() {
-    // create function to go to the
-    // completed Tasks
-    console.log('You clicked on me!')
+  completedTasks(event: any) {
+    this.router.navigate(['/completed-tasks']);
+    console.log(event);
   }
 
 }
