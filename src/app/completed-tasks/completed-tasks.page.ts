@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { RequestApiService } from '../api/reques-api/request-api.service';
+
 @Component({
   selector: 'app-completed-tasks',
   templateUrl: './completed-tasks.page.html',
@@ -7,9 +9,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CompletedTasksPage implements OnInit {
 
-  constructor() { }
+  t
+  constructor(public request: RequestApiService) { }
 
   ngOnInit() {
+    
   }
 
+  getTasks() {
+    this.taskList = [];
+    this.request.getRequest('api/tasks/').then(async r => {
+      let tasks = await r;
+
+      tasks.map(task => {
+        if (!task.completed) {
+          this.taskList.push({
+            id: task.id,
+            taskName: task.task_name,
+            created: task.created,
+            description: task.description,
+            completed: task.completed,
+            taskStatus: task.task_status
+          });
+        }
+      });
+    });
+  }
 }
