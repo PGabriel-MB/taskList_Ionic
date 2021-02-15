@@ -8,5 +8,17 @@
 </ion-header>
 
 <ion-content>
-
+  <div id="container">
+    <ion-list *ngIf="taskList.length > 0; else nothing" class="ion-padding">
+      <ion-item *ngFor="let task of taskList" button (click)="teste()">
+        <ion-label> {{ task.taskName }} </ion-label>
+          <ion-icon slot="icon-only" name="checkmark-circle-outline"></ion-icon>
+      </ion-item>
+    </ion-list>
+    <ng-template #nothing>
+      <div padding>
+        <h3>Você ainda não possui tarefas concluídas...</h3>
+      </div>
+    </ng-template>
+  </div>
 </ion-content>

@@ -29,8 +29,7 @@ export class HomePage {
     public mdlCtrlr: ModalController,
     public toastCtrlr: ToastController,
     public popOverCtrlr: PopoverController
-  ) {
-  }
+  ) { }
 
   ionViewWillEnter() {
     this.strgSvc.getUser().then(r => {

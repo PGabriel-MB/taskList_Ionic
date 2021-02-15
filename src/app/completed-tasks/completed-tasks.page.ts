@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Tarefa } from '../api/models/Tarefa';
 
 import { RequestApiService } from '../api/reques-api/request-api.service';
 
@@ -9,11 +10,16 @@ import { RequestApiService } from '../api/reques-api/request-api.service';
 })
 export class CompletedTasksPage implements OnInit {
 
-  t
   constructor(public request: RequestApiService) { }
 
+  taskList: Tarefa[] = [];
+
   ngOnInit() {
-    
+    this.getTasks();
+  }
+
+  teste() {
+    console.log("lsdnfçsan")
   }
 
   getTasks() {
@@ -22,7 +28,7 @@ export class CompletedTasksPage implements OnInit {
       let tasks = await r;
 
       tasks.map(task => {
-        if (!task.completed) {
+        if (task.completed) {
           this.taskList.push({
             id: task.id,
             taskName: task.task_name,
