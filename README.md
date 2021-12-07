@@ -10,3 +10,7 @@ Como tenho atuado como um freelancer ainda a escolher a própria stack, então e
 
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/d/d1/Ionic_Logo.svg">
+
+## Back-End da aplicação
+
+O [backEnd](https://github.com/PGabriel-MB/taskList_djangoBackend) é uma aplicação Django construída como api em Django REST Framework
