@@ -2,22 +2,22 @@
   <ion-content>
     <ion-slides pager="true">
       <ion-slide>
+        <h1>ToDoer</h1>
         <ion-card>
           <ion-card-header>
             <ion-card-title>Login</ion-card-title>
           </ion-card-header>
           <ion-card-content>
             <ion-item>
-              <ion-label position="stacked">Nome de Usuário</ion-label>
+              <ion-label position="floating">Nome de Usuário</ion-label>
               <ion-input type="text" [(ngModel)]="username"></ion-input>
             </ion-item>
             <ion-item>
-              <ion-label position="stacked">Senha</ion-label>
+              <ion-label position="floating">Senha</ion-label>
               <ion-input type="password" [(ngModel)]="password"></ion-input>
             </ion-item>
             <ion-button color="primary" (click)="sendLogin()" expand="block">Login</ion-button>
             <ion-card-subtitle> 
-              <ion-icon name="chevron-back-outline"></ion-icon>
               <ion-icon name="chevron-back-outline"></ion-icon>
               Arraste para esquerda para se <strong>Cadastrar</strong>
             </ion-card-subtitle>
@@ -31,19 +31,19 @@
           </ion-card-header>
           <ion-card-content>
             <ion-item>
-              <ion-label position="stacked">Nome de Usuário:</ion-label>
+              <ion-label position="floating">Nome de Usuário:</ion-label>
               <ion-input type="text" ></ion-input>
             </ion-item>
             <ion-item>
-              <ion-label position="stacked">E-mail:</ion-label>
+              <ion-label position="floating">E-mail:</ion-label>
               <ion-input type="email"></ion-input>
             </ion-item>
             <ion-item>
-              <ion-label position="stacked">Senha:</ion-label>
+              <ion-label position="floating">Senha:</ion-label>
               <ion-input type="password"></ion-input>
             </ion-item>
             <ion-item>
-              <ion-label position="stacked">Confirme Senha:</ion-label>
+              <ion-label position="floating">Confirme Senha:</ion-label>
               <ion-input type="password"></ion-input>
             </ion-item>
             <ion-button color="primary" expand="block" (click)="presentToast()">Cadastrar</ion-button>

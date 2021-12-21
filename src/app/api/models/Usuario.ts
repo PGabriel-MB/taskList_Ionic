@@ -1,4 +1,4 @@
-export class Tarefa {
+export class Usuario {
     id: string
     taskName: string;
     created: Date;
