@@ -8,7 +8,7 @@ export class Usuario {
 
     constructor(task) {
         this.id = task.id
-        this.taskName = task.t;
+        this.taskName = task.taskName;
         this.created = task.created;
         this.description = task.description;
         this.completed = task.completed;
