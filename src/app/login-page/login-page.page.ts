@@ -53,7 +53,26 @@ export class LoginPagePage implements OnInit {
     this.router.navigate(['/home']);
   }
 
+  isEmpty() {
+    if (!this.username || !this.password)
+      return true
+    return false
+  }
+
+  async presentToastAlertMessage(message) {
+    const toast = await this.toastCtrlr.create({
+      message,
+      duration: 3000
+    });
+    toast.present();
+  }
+
   sendLogin() {
+    if (this.isEmpty()) {
+      this.presentToastAlertMessage('Preencha corretamente todos os Campos!');
+      return;
+    }
+
     this.request.postRequest(
       'rest_auth/login/', 
       { username: this.username, password: this.password },
